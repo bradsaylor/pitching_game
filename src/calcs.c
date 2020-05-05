@@ -58,19 +58,49 @@ float calc_vector_dy(float length, float rad) {
 
 // ---------------- MAIN() HELPER FUNCTIONS
 
+void find_smallest_length(int *length_data, int *smallest, int size) {
+    int loop_flag = 0;
+    
+    for(int count = 0; count < size; count++) {
+	loop_flag = 0;
+	for(int count2 = 0; count2 < size; count2++) {
+	    if(count2 != count) {
+		if (length_data[count] <= length_data[count2]) {
+		    loop_flag += 1;
+		    if (loop_flag == (size - 1)) {
+			*smallest = count;
+			count2 = size;
+			count = size;
+		    }
+		}
+	    }
+	}
+    }
+}
+
 void rotate_vector(struct vector *vector, float angle, int dirx, int diry) {
     struct vector temp_vector = *vector;
     vector->P2.x = vector->P1.x + (dirx) * calc_vector_dx(calc_vector_length(&temp_vector), angle);
     vector->P2.y = vector->P1.y + (diry) * calc_vector_dy(calc_vector_length(&temp_vector), angle);
 }
 
-void order_length_data(float *list, int *order_list, int size) {
+void order_length_data(float *list, int *order_list, int size, int index_of_smallest_length) {
     int num_smaller = 0;
+    float list_minus_smallest[size - 1];
+
+    int index = 0;
     for(int count = 0; count < size; count++) {
+	if(count != index_of_smallest_length) {
+	    list_minus_smallest[index] = list[count];
+	    index++;
+	}
+    }
+
+    for(int count = 0; count < (size - 1); count++) {
 	num_smaller = 0;
 	for(int count2 = 0; count2 < size; count2++) {
-	    if(list[count2] < list[count]) num_smaller++;
+	    if(list_minus_smallest[count2] >= list_minus_smallest[count]) num_smaller++;
 	}
-	order_list[count] = (size - 1) - num_smaller;
+	order_list[count] = (size) - num_smaller;
     }
 }

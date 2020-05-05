@@ -16,6 +16,7 @@ float calc_vector_dx(float length, float rad);
 float calc_vector_dy(float length, float rad);
 
 // --------------- MAIN() HELPER FUNCTIONS
+void find_smallest_length(int *length_data, int *smallest, int size);
 void rotate_vector(struct vector *vector, float angle, int dirx, int diry);
-void order_length_data(float *list, int *order_list, int size);
+void order_length_data(float *list, int *order_list, int size, int index_of_smallest_length);
 #endif //CALCS_H

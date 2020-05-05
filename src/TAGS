@@ -1,5 +1,5 @@
 
-calcs.c,853
+calcs.c,983
 float calc_vector_x_comp(struct vector *vector) {calc_vector_x_comp8,102
 float calc_vector_y_comp(struct vector *vector) {calc_vector_y_comp13,245
 float calc_vector_dot_product(struct vector *vector1, struct vector *vector2) {calc_vector_dot_product18,388
@@ -8,8 +8,9 @@ float calc_vector_rad(struct vector *vector) {calc_vector_rad33,835
 float calc_rad_between_vectors(struct vector *vector1, struct vector *vector2) {calc_rad_between_vectors39,997
 float calc_vector_dx(float length, float rad) {calc_vector_dx45,1203
 float calc_vector_dy(float length, float rad) {calc_vector_dy51,1336
-void rotate_vector(struct vector *vector, float angle, int dirx, int diry) {rotate_vector61,1517
-void order_length_data(float *list, int *order_list, int size) {order_length_data67,1838
+void find_smallest_length(int *length_data, int *smallest, int size) {find_smallest_length61,1517
+void rotate_vector(struct vector *vector, float angle, int dirx, int diry) {rotate_vector81,1953
+void order_length_data(float *list, int *order_list, int size, int index_of_smallest_length) {order_length_data87,2274
 
 main.c,332
 struct point top_left      = {.x = 0  , .y = 0   };top_left7,85

@@ -22,24 +22,10 @@ int main()
 {
 
     int length_data[4]  = {0, 182, 200, 220};
-    int length_data_order[4] = {0};
+    int length_data_order[3] = {0};
 
     int index_of_smallest_length = 0;
-    int loop_flag = 0;
-    for(int count = 0; count < 4; count++) {
-	for(int count2 = 0; count2 < 4; count2++) {
-	    if(count2 != count) {
-		if (length_data[count] <= length_data[count2]) {
-		    loop_flag += 1;
-		    if (loop_flag == 3) {
-			index_of_smallest_length = count;
-			count2 = 4;
-			count = 4;
-		    }
-		}
-	    }
-	}
-    }
+    find_smallest_length(length_data, &index_of_smallest_length, 4);
 
     struct point center = {64, 64};
     
@@ -87,8 +73,23 @@ int main()
 	calc_vector_length(&vector_to_center[3]),	
     };
 
+    order_length_data(lengths_to_center, length_data_order, 4, index_of_smallest_length);
+    for(int count = 0; count < 3; count++) printf("ORDER: %d\n", length_data_order[count]);
 
-    order_length_data(lengths_to_center, length_data_order, 4);
+    struct point longest, medium, shortest;
+
+    for(int count = 0; count < 3; count++) {
+	if (length_data_order[count] == 2)     longest  = A_vector[count].P2;
+	else if(length_data_order[count] == 1) medium   = A_vector[count].P2;
+	else if(length_data_order[count] == 0) shortest = A_vector[count].P2;	
+    }
+
+    printf("LONGEST: (%d, %d)\n", longest.x, longest.y);
+    printf("MEDIUM: (%d, %d)\n", medium.x, medium.y);
+    printf("SHORTEST: (%d, %d)\n", shortest.x, shortest.y);    
+    
+    //determine the axis for adjustment
+
     
 
     for(int count = 0; count < 4; count++) {
@@ -102,10 +103,8 @@ int main()
 	    );
     }
 
-    for(int count = 0; count < 4; count++) {
-	printf("order %d\n", length_data_order[count]);
-    }    
 
+    
     
     return 0;
 }
